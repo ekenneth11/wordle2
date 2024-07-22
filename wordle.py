@@ -7,18 +7,23 @@ with open(path, 'r') as file:
         words.append(word)
 
 guess = random.choice(words)
-player = input("What's your guess?")
+player = input("What's your guess? ")
+output = "_____"
 while guess != player:
     if not player.isalpha():
         print("Word can't have special characters")
-        player = input("What's your guess?")
+        player = input("What's your guess? ")
         continue
-    output = ""
+    elif len(player) > 5:
+        print("Guess the 5-letter word\n")
+        player = input("What's your guess? ")
+        continue
+    
     for i in range(5):
         if guess[i] == player[i]:
-            output += guess[i]
-        else:
-            output += "_"
+            output = output[:i] + guess[i] + output[i+1:]
+        
     print(output + "\n")
-    player = input("What's your guess?")
+
+    player = input("What's your guess? ")
 print("Congratulations the word is "+ guess)
